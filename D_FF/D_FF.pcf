@@ -1,0 +1,3 @@
+set_io clk R9
+set_io D B5
+set_io Q B6

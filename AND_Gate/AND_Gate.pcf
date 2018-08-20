@@ -1,0 +1,3 @@
+set_io out B5
+set_io a B10
+set_io b B11

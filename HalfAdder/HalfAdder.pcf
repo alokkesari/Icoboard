@@ -1,0 +1,5 @@
+
+set_io a B10
+set_io b B11
+set_io cout B5
+set_io sum B6
