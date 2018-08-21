@@ -1,3 +1,4 @@
 before_install:
- -chmod +x depinstall.sh
- -./depinstall.sh
+  - chmod +x build.sh
+install:
+  - ./depinstall.sh
