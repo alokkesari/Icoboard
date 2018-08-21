@@ -1,4 +1,6 @@
 before_install:
-  - chmod +x build.sh
+  - chmod +x depinstall.sh
+  - chmod +x automa.sh
+  - chmod +x cp_automa.sh
 install:
   - ./depinstall.sh
