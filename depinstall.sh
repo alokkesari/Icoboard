@@ -11,7 +11,7 @@ svn co http://svn.clifford.at/handicraft/2015/icoprog
 cd icoprog && make install
 
 sudo apt-get install build-essential clang bison flex libreadline-dev
-sudo apt-get install gawk tel-dev libffi-dev git mercurial graphviz
+sudo apt-get install gawk tcl8.6-dev libffi-dev git mercurial graphviz
 sudo apt-get install xdot pkg-config python python3 libftdi-dev
 
 cd $HOME
