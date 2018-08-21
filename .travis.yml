@@ -1,2 +1,3 @@
 before_install:
- - ./depinstall.sh
+ -chmod +x depinstall.sh
+ -./depinstall.sh
