@@ -1,3 +1,6 @@
+cd #HOME
+sudo apt-get install geany
+
 cd $HOME
 git clone git://git.drogon.net/wiringPi
 cd wiringPi && ./build
