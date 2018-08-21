@@ -1,3 +1,6 @@
+#Type your input and output constraints here. The general format is: 
+#set_io DummyOutputPin DummyPhysicalPin
+#set_io DummyInputPin DummyPhysicalPin
 set_io out B5
 set_io a B10
 set_io b B11

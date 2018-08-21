@@ -1,83 +1,90 @@
 dir=`pwd`
-parent=$(basename "$dir")
-echo 'Type the name of the top module:'
+echo 'Type the name of the module:'
+read parent
+echo 'For cases where there are many submodules, type the name of the top module (same as module name otherwise):'
 read topmod
-sudo rm `echo $parent`.asc `echo $parent`.bin `echo $parent`.blif `echo $parent`.dot `echo $parent`.pdf ascript.sh
+sudo rm `echo $dir`/`echo $parent`/`echo $parent`.asc `echo $dir`/`echo $parent`/`echo $parent`.bin `echo $dir`/`echo $parent`/`echo $parent`.blif `echo $dir`/`echo $parent`/`echo $parent`.dot `echo $dir`/`echo $parent`/`echo $parent`.pdf 
 sudo rm /root/.yosys_show.dot /root/.yosys_history /root/.yosys_show.dot.pid /root/.yosys_show.ps
-cd $HOME
-cd yosys
-sudo rm ascript.sh
-echo $dir
-echo -n 'read_verilog ' >> ascript.sh 
-echo -n `echo $dir` >> ascript.sh
-echo -n '/' >> ascript.sh
-echo -n `echo $parent` >> ascript.sh
-echo '.v' >> ascript.sh
-echo 'write_ilang' >> ascript.sh
-echo 'proc; opt' >> ascript.sh
-echo -n 'show ' >> ascript.sh
-echo `echo $topmod` >> ascript.sh
-echo '.PHONY: default' >> Makefile
-echo 'default: prog_sram' >> Makefile
-echo >> Makefile
-echo '$(v_fname).blif: $(v_fname).v' >> Makefile
-echo -n '	yosys -p ' >> Makefile
-echo -n "'" >> Makefile 
-echo -n 'synth_ice40 -blif ' >> Makefile 
-echo -n "\$(v_fname).blif" >> Makefile
-echo -n "' " >> Makefile
-echo '$(v_fname).v' >> Makefile
-echo >> Makefile
-echo '$(v_fname).asc: $(v_fname).blif $(v_fname).pcf' >> Makefile
-echo '	arachne-pnr -d 8k -p $(v_fname).pcf -o $(v_fname).asc $(v_fname).blif' >> Makefile
-echo >> Makefile
-echo '$(v_fname).bin: $(v_fname).asc' >> Makefile
-echo '	icetime -d hx8k -c 25 $(v_fname).asc' >> Makefile
-echo '	icepack $(v_fname).asc $(v_fname).bin' >> Makefile
-echo >> Makefile
-echo 'prog_sram: $(v_fname).bin' >> Makefile
-echo '	icoprog -p < $(v_fname).bin' >> Makefile
-sudo cp `pwd`/Makefile `echo $dir`/Makefile
-sudo rm Makefile
-sudo ./yosys -p 'script ascript.sh'
-sudo rm test.c
-echo '#include<wiringPi.h>' >> test.c
-echo '#include<stdio.h>' >> test.c
-echo 'int main (void)' >> test.c
-echo '{' >> test.c
-echo 'wiringPiSetup();' >> test.c
-echo 'pinMode(27, INPUT);' >> test.c
-echo 'int t;' >> test.c
-echo 'for(int i=0; i<1; i++)' >> test.c
-echo '{' >> test.c
-echo 't=digitalRead(27);' >> test.c
-echo 'if(t==HIGH)' >> test.c
-echo '{' >> test.c
-echo -n 'printf("<---------------------------Bitstream Upload Completed!------------------------>\n<------------------------------------------------------------------------------>\n<---------------------------FOR THE LOGIC DIAGRAM, TYPE:----------------------->\n<------------------------------------------------------------------------------>\nsudo qpdfview ' >> test.c
-echo -n `echo $dir` >> test.c
-echo -n '/' >> test.c
-echo -n `echo $parent` >> test.c
-echo -n '.pdf\n<------------------------------------------------------------------------------>\n<-----------------------------------OR CHECK:---------------------------------->\n<------------------------------------------------------------------------------>\n' >> test.c
-echo -n `echo $dir` >> test.c
-echo '\n<------------------------------------------------------------------------------>\n");}' >> test.c
-echo 'else if(t==LOW)' >> test.c
-echo '{' >> test.c
-echo 'printf("<---------------------------Bitstream Upload Failed!--------------------------->\n");}' >> test.c
-echo '}' >> test.c
-echo 'return 0;}' >> test.c
-gcc -Wall -o progtest test.c -lwiringPi
-sudo rm test.c
-sudo chmod +x progtest
-sudo cp /root/.yosys_show.dot `echo $dir`/`echo $parent`.dot
+sudo rm `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n 'read_verilog ' >> `echo $HOME`/yosys/BitMake/ascript.sh 
+echo -n `echo $dir` >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n '/' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n `echo $parent` >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n '/' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n `echo $parent` >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo '.v' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo 'write_ilang' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo 'proc; opt' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo -n 'show ' >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo `echo $topmod` >> `echo $HOME`/yosys/BitMake/ascript.sh
+echo '.PHONY: default' >> `echo $HOME`/yosys/BitMake/Makefile
+echo 'default: prog_sram' >> `echo $HOME`/yosys/BitMake/Makefile
+echo >> `echo $HOME`/yosys/BitMake/Makefile
+echo '$(v_fname).blif: $(v_fname).v' >> `echo $HOME`/yosys/BitMake/Makefile
+echo -n '	yosys -p ' >> `echo $HOME`/yosys/BitMake/Makefile
+echo -n "'" >> `echo $HOME`/yosys/BitMake/Makefile 
+echo -n 'synth_ice40 -blif ' >> `echo $HOME`/yosys/BitMake/Makefile 
+echo -n "\$(v_fname).blif" >> `echo $HOME`/yosys/BitMake/Makefile
+echo -n "' " >> `echo $HOME`/yosys/BitMake/Makefile
+echo '$(v_fname).v' >> `echo $HOME`/yosys/BitMake/Makefile
+echo >> `echo $HOME`/yosys/BitMake/Makefile
+echo '$(v_fname).asc: $(v_fname).blif $(v_fname).pcf' >> `echo $HOME`/yosys/BitMake/Makefile
+echo '	arachne-pnr -d 8k -p $(v_fname).pcf -o $(v_fname).asc $(v_fname).blif' >> `echo $HOME`/yosys/BitMake/Makefile
+echo >> `echo $HOME`/yosys/BitMake/Makefile
+echo '$(v_fname).bin: $(v_fname).asc' >> `echo $HOME`/yosys/BitMake/Makefile
+echo '	icetime -d hx8k -c 25 $(v_fname).asc' >> `echo $HOME`/yosys/BitMake/Makefile
+echo '	icepack $(v_fname).asc $(v_fname).bin' >> `echo $HOME`/yosys/BitMake/Makefile
+echo >> `echo $HOME`/yosys/BitMake/Makefile
+echo 'prog_sram: $(v_fname).bin' >> `echo $HOME`/yosys/BitMake/Makefile
+echo '	icoprog -p < $(v_fname).bin' >> `echo $HOME`/yosys/BitMake/Makefile
+cd `echo $HOME`/yosys/BitMake
+sudo `echo $HOME`/yosys/./yosys -p 'script ascript.sh'
+cd `echo $dir`
+sudo rm `echo $HOME`/yosys/BitMake/test.c
+echo '#include<wiringPi.h>' >> `echo $HOME`/yosys/BitMake/test.c
+echo '#include<stdio.h>' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'int main (void)' >> `echo $HOME`/yosys/BitMake/test.c
+echo '{' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'wiringPiSetup();' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'pinMode(27, INPUT);' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'int t;' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'for(int i=0; i<1; i++)' >> `echo $HOME`/yosys/BitMake/test.c
+echo '{' >> `echo $HOME`/yosys/BitMake/test.c
+echo 't=digitalRead(27);' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'if(t==HIGH)' >> `echo $HOME`/yosys/BitMake/test.c
+echo '{' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n 'printf("<---------------------------Bitstream Upload Completed!------------------------>\n<------------------------------------------------------------------------------>\n<---------------------------FOR THE LOGIC DIAGRAM, TYPE:----------------------->\n<------------------------------------------------------------------------------>\nsudo qpdfview ' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n `echo $dir` >> `echo $HOME`/yosys/BitMake/test.c
+echo -n '/' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n `echo $parent` >> `echo $HOME`/yosys/BitMake/test.c
+echo -n '/' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n `echo $parent` >> `echo $HOME`/yosys/BitMake/test.c
+echo -n '.pdf\n<------------------------------------------------------------------------------>\n<-----------------------------------OR CHECK:---------------------------------->\n<------------------------------------------------------------------------------>\n' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n `echo $dir` >> `echo $HOME`/yosys/BitMake/test.c
+echo -n '/' >> `echo $HOME`/yosys/BitMake/test.c
+echo -n `echo $parent` >> `echo $HOME`/yosys/BitMake/test.c
+echo '\n<------------------------------------------------------------------------------>\n");}' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'else if(t==LOW)' >> `echo $HOME`/yosys/BitMake/test.c
+echo '{' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'printf("<---------------------------Bitstream Upload Failed!--------------------------->\n");}' >> `echo $HOME`/yosys/BitMake/test.c
+echo '}' >> `echo $HOME`/yosys/BitMake/test.c
+echo 'return 0;}' >> `echo $HOME`/yosys/BitMake/test.c
+gcc -Wall -o `echo $HOME`/yosys/BitMake/progtest `echo $HOME`/yosys/BitMake/test.c -lwiringPi
+sudo rm `echo $HOME`/yosys/BitMake/test.c
+sudo chmod +x `echo $HOME`/yosys/BitMake/progtest
+sudo cp /root/.yosys_show.dot `echo $dir`/`echo $parent`/`echo $parent`.dot
 sudo rm /root/.yosys_show.dot /root/.yosys_history /root/.yosys_show.dot.pid /root/.yosys_show.ps
 set -e
-cd $dir
-sudo dot -T pdf `echo $parent`.dot -o `echo $parent`.pdf
+sudo dot -T pdf `echo $dir`/`echo $parent`/`echo $parent`.dot -o `echo $dir`/`echo $parent`/`echo $parent`.pdf
 sudo killall -s SIGKILL xdot
-sudo make v_fname=`echo $parent`
-sudo /home/pi/yosys/./progtest
-sudo rm /home/pi/yosys/progtest
-sudo rm `echo $parent`.asc `echo $parent`.bin `echo $parent`.blif `echo $parent`.dot Makefile
+cd `echo $HOME`/yosys/BitMake
+sudo make v_fname=`echo $dir`/`echo $parent`/`echo $parent`
+cd `echo $dir`
+sudo `echo $HOME`/yosys/BitMake/./progtest
+sudo rm `echo $HOME`/yosys/BitMake/Makefile
+sudo rm `echo $HOME`/yosys/BitMake/progtest
+sudo rm `echo $HOME`/yosys/BitMake/ascript.sh
+sudo rm `echo $dir`/`echo $parent`/`echo $parent`.asc `echo $dir`/`echo $parent`/`echo $parent`.bin `echo $dir`/`echo $parent`/`echo $parent`.blif `echo $dir`/`echo $parent`/`echo $parent`.dot 
 exec bash
 
 

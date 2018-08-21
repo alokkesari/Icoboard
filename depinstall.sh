@@ -5,8 +5,6 @@ cd $HOME
 git clone git://git.drogon.net/wiringPi
 cd wiringPi && ./build
 
-set -e
-
 cd $HOME
 sudo apt-get install subversion
 svn co http://svn.clifford.at/handicraft/2015/icoprog
@@ -27,3 +25,5 @@ cd arachne-pnr && make && sudo make install
 cd $HOME
 git clone https://github.com/cliffordwolf/yosys.git yosys
 cd yosys && make && sudo make install
+sudo chmod +x -R yosys
+mkdir BitMake
