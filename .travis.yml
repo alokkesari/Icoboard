@@ -3,7 +3,7 @@ before_install:
   - chmod +x depinstall.sh
   - chmod +x automa.sh
   - chmod +x cp_automa.sh
-  - apt-get update
-  - apt-get -f install
+  - sudo apt-get update
+  - sudo apt-get -f install
 install:
   - ./depinstall.sh
