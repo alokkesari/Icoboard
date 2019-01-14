@@ -29,4 +29,6 @@
 
 * Running *automa.sh*, apart from synthesis and implementation runs as mentioned above, generates the RTL schematic pdf file in the project directory.
 
+* Example projects are also provided in the Icoboard repository. They can be run using the above mentioned procedures. Make sure that the project name and the module name that you're typing when prompted are same as that given in the example projects.
+
 > *Contact ARK for doubts, queries, suggestions, etc., at arkesari@iith.ac.in or alok.kesari@yahoo.co.in.*
