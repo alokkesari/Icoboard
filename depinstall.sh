@@ -1,4 +1,4 @@
-cd #HOME
+cd $HOME
 sudo apt-get install geany -y
 
 cd $HOME
@@ -11,7 +11,7 @@ svn co http://svn.clifford.at/handicraft/2015/icoprog
 cd icoprog && make install
 
 sudo apt-get install build-essential clang bison flex libreadline-dev -y
-sudo apt-get install gawk tcl8.6-dev libffi-dev git mercurial graphviz -y
+sudo apt-get install gawk tcl8.6-dev libffi-dev git mercurial graphviz tcl-dev -y
 sudo apt-get install xdot pkg-config python python3 libftdi-dev -y
 
 cd $HOME
